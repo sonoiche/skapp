@@ -99,6 +99,7 @@
                                 </div>
                             </div>
                             <button class="btn btn-block btn-primary mt-3" type="submit">Register</button>
+                            <a href="{{ url('login') }}" class="btn btn-block btn-outline-primary mt-3">Login Here</a>
                         </form>
                     </div>
                 </div>

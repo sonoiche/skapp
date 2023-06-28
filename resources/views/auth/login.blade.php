@@ -77,6 +77,7 @@
                                 <div class="float-right"><a class="text-muted" href="{{ route('password.request') }}">Forgot your password?</a></div>
                             </div>
                             <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
+                            <a href="{{ url('register') }}" class="btn btn-block btn-outline-primary mt-3">Register Here</a>
                         </form>
                     </div>
                 </div>
