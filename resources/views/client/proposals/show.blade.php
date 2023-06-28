@@ -37,7 +37,7 @@
 </div>
 <div class="d-flex justify-content-between my-3">
     <h4>Proposal Tasks</h4>
-    @if ($proposal->status == 'Apporved')
+    @if ($proposal->status == 'Approved')
     <div class="">
         <a href="{{ url('client/tasks/create') }}?proposal_id={{ $proposal->id }}" class="btn btn-outline-primary">Add New Task</a>
     </div>
@@ -115,7 +115,7 @@
 </div>
 <div class="d-flex justify-content-between my-3">
     <h4>Proposal Expenses</h4>
-    @if ($proposal->status == 'Apporved')
+    @if ($proposal->status == 'Approved')
     <div class="">
         <a href="{{ url('client/expenses/create') }}?proposal_id={{ $proposal->id }}" class="btn btn-outline-primary">Add New Expenses</a>
     </div>
