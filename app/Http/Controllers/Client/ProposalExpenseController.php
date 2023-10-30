@@ -30,14 +30,14 @@ class ProposalExpenseController extends Controller
             $file  = $request->file('document_file');
             $document_file = time().'.'.$file->getClientOriginalExtension();
 
-            $path = Storage::disk('s3')->putFileAs(
+            $path = Storage::disk('upcloud')->putFileAs(
                 'skapp/uploads/expenses',
                 $file,
                 $document_file,
                 'public'
             );
             
-            $expense->document_file = Storage::disk('s3')->url($path);
+            $expense->document_file = Storage::disk('upcloud')->url($path);
         }
 
         $expense->save();
@@ -64,14 +64,14 @@ class ProposalExpenseController extends Controller
             $file  = $request->file('document_file');
             $document_file = time().'.'.$file->getClientOriginalExtension();
 
-            $path = Storage::disk('s3')->putFileAs(
+            $path = Storage::disk('upcloud')->putFileAs(
                 'skapp/uploads/expenses',
                 $file,
                 $document_file,
                 'public'
             );
             
-            $expense->document_file = Storage::disk('s3')->url($path);
+            $expense->document_file = Storage::disk('upcloud')->url($path);
         }
 
         $expense->save();

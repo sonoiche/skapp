@@ -46,14 +46,14 @@ class UserController extends Controller
                 $file  = $request->file('photo');
                 $photo = time().'.'.$file->getClientOriginalExtension();
     
-                $path = Storage::disk('s3')->putFileAs(
+                $path = Storage::disk('upcloud')->putFileAs(
                     'skapp/uploads/users',
                     $file,
                     $photo,
                     'public'
                 );
                 
-                $user->photo = Storage::disk('s3')->url($path);
+                $user->photo = Storage::disk('upcloud')->url($path);
             }
 
             if(isset($request['password']) && $request['password'] != null) {

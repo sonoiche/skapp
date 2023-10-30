@@ -47,9 +47,22 @@
     @forelse ($tasks as $item)
     <div class="col-md-3 col-sm-12">
         <div class="card">
-            @if($item->status != 'Completed')
+            @if($item->status != 'Completed' && $item->user_id == auth()->user()->id)
             <div class="card-header">
                 <a href="{{ url('client/tasks', $item->id) }}/edit" class="float-right"><i class="icon-pencil"></i></a>
+            </div>
+            @endif
+            @if($item->assigned_user == auth()->user()->id && $item->status != 'Completed')
+            <div class="push-right">
+                <div class="btn-group">
+                    <a href="javascript:;" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </a>
+                    <div class="dropdown-menu animated pulse" role="menu" style="">
+                        <a class="dropdown-item" href="javascript:;" onclick="changeTaskStatus({{ $item->id }}, 'in_progress')">In Progress</a>
+                        <a class="dropdown-item" href="javascript:;" onclick="changeTaskStatus({{ $item->id }}, 'complete')">Completed</a>
+                    </div>
+                </div>
             </div>
             @endif
             <div class="card-body">
@@ -57,12 +70,12 @@
                     @if ($item->status == null && $item->due_date < date('Y-m-d'))
                     <tr>
                         <td><strong>Status</strong></td>
-                        <td>Task Overdue</td>
+                        <td class="text-danger">Task Overdue</td>
                     </tr>
-                    @elseif($item->status != null && $item->due_date < date('Y-m-d'))
+                    @elseif($item->status != null && $item->status != 'Completed' && $item->due_date < date('Y-m-d'))
                     <tr>
                         <td><strong>Status</strong></td>
-                        <td>{{ $item->status }} &mdash; Task Overdue</td>
+                        <td>{{ $item->status }} &mdash; <span class="text-danger">Task Overdue</span></td>
                     </tr>
                     @else
                     <tr>
@@ -167,6 +180,13 @@
 <link rel="stylesheet" href="{{ url('assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
 <link rel="stylesheet" href="{{ url('assets/vendor/datatables.net-keytable-bs/css/keyTable.bootstrap.css') }}">
 <link rel="stylesheet" href="{{ url('assets/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.css') }}">
+<style>
+.push-right {
+    display: flex;
+    justify-content: end;
+    padding: 10px 20px;
+}
+</style>
 @endsection
 
 @section('page-js')
@@ -214,6 +234,26 @@ function deleteExpenses(id) {
             $.ajax({
                 type: "DELETE",
                 url: "{{ url('client/expenses') }}/"+id,
+                dataType: "json",
+                success: function (response) {
+                    location.reload();
+                }
+            });
+        }
+    })
+}
+
+function changeTaskStatus(id, status) {
+    swal({
+        title: "Are you sure?",
+        text: "You're about the change the task status",
+        icon: "warning",
+        buttons: { cancel: !0, confirm: { text: "Yes, proceed!", value: !0, visible: !0, className: "bg-success", closeModal: !0 } },
+    }).then(function (e) {
+        if(e) {
+            $.ajax({
+                type: "GET",
+                url: "{{ url('client/tasks') }}/"+id+"?type="+status,
                 dataType: "json",
                 success: function (response) {
                     location.reload();

@@ -44,14 +44,14 @@ class ProposalController extends Controller
             $file  = $request->file('document_file');
             $document_file = time().'.'.$file->getClientOriginalExtension();
 
-            $path = Storage::disk('s3')->putFileAs(
+            $path = Storage::disk('upcloud')->putFileAs(
                 'skapp/uploads/proposals',
                 $file,
                 $document_file,
                 'public'
             );
             
-            $proposal->document_file = Storage::disk('s3')->url($path);
+            $proposal->document_file = Storage::disk('upcloud')->url($path);
         }
 
         $proposal->save();
@@ -79,14 +79,14 @@ class ProposalController extends Controller
             $file  = $request->file('document_file');
             $document_file = time().'.'.$file->getClientOriginalExtension();
 
-            $path = Storage::disk('s3')->putFileAs(
+            $path = Storage::disk('upcloud')->putFileAs(
                 'skapp/uploads/proposals',
                 $file,
                 $document_file,
                 'public'
             );
             
-            $proposal->document_file = Storage::disk('s3')->url($path);
+            $proposal->document_file = Storage::disk('upcloud')->url($path);
         }
 
         if(auth()->user()->committee) {
@@ -113,7 +113,7 @@ class ProposalController extends Controller
     {
         $proposal = Proposal::find($id);
 
-        Storage::disk('s3')->delete('skapp/uploads/proposals/'.basename($proposal->document_file));
+        Storage::disk('upcloud')->delete('skapp/uploads/proposals/'.basename($proposal->document_file));
 
         $proposal->document_file = null;
         $proposal->save();

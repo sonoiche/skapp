@@ -46,14 +46,49 @@
                 </li>
                 @if (auth()->user()->role == 'Admin')
                 <li class=" ">
+                    <a href="#events" title="Events" data-toggle="collapse"><em class="icon-calendar"></em><span>Events</span></a>
+                    <ul class="sidebar-nav sidebar-subnav collapse" id="events">
+                        <li class="sidebar-subnav-header">Manage Events</li>
+                        <li class=" ">
+                            <a href="{{ url('client/events') }}" title="Events List"><span>Events List</span></a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{ url('client/events/create') }}" title="Events Create"><span>Create New Event</span></a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{ url('client/events-calendar') }}" title="Events Calendar"><span>Events Calendar</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class=" ">
+                    <a href="#reports" title="Reports" data-toggle="collapse"><em class="icon-chart"></em><span>Reports</span></a>
+                    <ul class="sidebar-nav sidebar-subnav collapse" id="reports">
+                        <li class="sidebar-subnav-header">Reports</li>
+                        <li class=" ">
+                            <a href="{{ url('client/reports/proposal') }}" title="Proposals Report"><span>Proposals Report</span></a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{ url('client/reports/tasks') }}" title="Tasks Report"><span>Tasks Report</span></a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{ url('client/reports/finance') }}" title="Finances Report"><span>Finances Report</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class=" ">
                     <a href="{{ url('client/users') }}" title="Users">
                         <em class="icon-people"></em><span data-localize="sidebar.nav.USER">User Lists</span>
                     </a>
                 </li>
                 @endif
                 <li class=" ">
+                    <a href="{{ url('client/account') }}" title="Account Settings">
+                        <em class="icon-settings"></em><span data-localize="sidebar.nav.ACCOUNT">Account Settings</span>
+                    </a>
+                </li>
+                <li class=" ">
                     <a href="{{ route('logout') }}" title="Logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <em class="icon-grid"></em><span data-localize="sidebar.nav.Logout">Logout</span>
+                        <em class="icon-logout"></em><span data-localize="sidebar.nav.Logout">Logout</span>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

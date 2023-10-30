@@ -45,14 +45,14 @@ class TaskController extends Controller
             $file  = $request->file('document_file');
             $document_file = time().'.'.$file->getClientOriginalExtension();
 
-            $path = Storage::disk('s3')->putFileAs(
+            $path = Storage::disk('upcloud')->putFileAs(
                 'skapp/uploads/tasks',
                 $file,
                 $document_file,
                 'public'
             );
             
-            $task->document_file = Storage::disk('s3')->url($path);
+            $task->document_file = Storage::disk('upcloud')->url($path);
         }
 
         $task->save();
@@ -90,6 +90,6 @@ class TaskController extends Controller
                 break;
         }
 
-        return redirect()->back();
+        return response()->json(200);
     }
 }

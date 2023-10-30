@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('contact_number')->nullable();
-            $table->enum('role', ['Admin', 'User'])->nullable();
+            $table->enum('role', ['Admin', 'Committee', 'User'])->nullable();
             $table->enum('gender', ['Male','Female'])->nullable();
             $table->enum('status', ['Active', 'Inactive'])->nullable();
             $table->string('photo')->nullable();

@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function template()
+    {
+        return view('client.mails.reminder');
+    }
 }

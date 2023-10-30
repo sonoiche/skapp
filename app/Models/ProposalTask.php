@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Proposal;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -38,5 +39,15 @@ class ProposalTask extends Model
     public function assign()
     {
         return $this->belongsTo(User::class, 'assigned_user');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function proposal()
+    {
+        return $this->belongsTo(Proposal::class, 'proposal_id');
     }
 }
