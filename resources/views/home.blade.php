@@ -6,8 +6,8 @@
         <div class="card flex-row align-items-center align-items-stretch border-0">
             <div class="col-4 d-flex align-items-center bg-primary-dark justify-content-center rounded-left"><em class="icon-cloud-upload fa-3x"></em></div>
             <div class="col-8 py-3 bg-primary rounded-right">
-                <div class="h2 mt-0">1700</div>
-                <div class="text-uppercase">Uploads</div>
+                <div class="h2 mt-0">{{ $activeProposalCount }}</div>
+                <div class="text-uppercase">Active Proposals</div>
             </div>
         </div>
     </div>
@@ -16,8 +16,8 @@
         <div class="card flex-row align-items-center align-items-stretch border-0">
             <div class="col-4 d-flex align-items-center bg-purple-dark justify-content-center rounded-left"><em class="icon-globe fa-3x"></em></div>
             <div class="col-8 py-3 bg-purple rounded-right">
-                <div class="h2 mt-0">700<small>GB</small></div>
-                <div class="text-uppercase">Quota</div>
+                <div class="h2 mt-0">{{ $myProposalCount }}</div>
+                <div class="text-uppercase">My Proposals</div>
             </div>
         </div>
     </div>
@@ -26,8 +26,8 @@
         <div class="card flex-row align-items-center align-items-stretch border-0">
             <div class="col-4 d-flex align-items-center bg-green-dark justify-content-center rounded-left"><em class="icon-bubbles fa-3x"></em></div>
             <div class="col-8 py-3 bg-green rounded-right">
-                <div class="h2 mt-0">500</div>
-                <div class="text-uppercase">Reviews</div>
+                <div class="h2 mt-0">{{ $assignedTaskCount }}</div>
+                <div class="text-uppercase">Assigned Tasks</div>
             </div>
         </div>
     </div>
@@ -51,5 +51,48 @@
         </div>
         <!-- END date widget-->
     </div>
-</div>        
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Assigned Task Due Soon</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Document File</th>
+                            <th>Created By</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($tasks as $key => $item)
+                        <tr>
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>
+                                @if (isset($item->document_file))
+                                <a href="{{ $item->document_file }}" target="_blank">Download File</a>
+                                @endif
+                            </td>
+                            <td>{{ isset($item->user) ? $item->user->fullname : '' }}</td>
+                            <td>{{ $item->due_date_display }}</td>
+                            <td>{{ $item->status }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="text-center">No tasks due on the next 3 days</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

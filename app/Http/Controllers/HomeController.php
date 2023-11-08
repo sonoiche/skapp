@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proposal;
+use App\Models\ProposalTask;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $today      = Carbon::now()->subDays(3)->format('Y-m-d');
+        $user_id    = auth()->user()->id;
+        $data['activeProposalCount'] = Proposal::where('status', 'Approved')->count();
+        $data['myProposalCount']     = Proposal::where('user_id', $user_id)->where('status', '!=', 'Declined')->count();
+        $data['assignedTaskCount']   = ProposalTask::where('assigned_user', $user_id)->where('status', '!=', 'Completed')->count();
+        $data['tasks']               = ProposalTask::where('assigned_user', $user_id)->where('status', '!=', 'Completed')->where('due_date', '<', $today)->get();
+        
+        return view('home', $data);
     }
 
     public function template()

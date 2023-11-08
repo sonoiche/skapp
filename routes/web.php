@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Client\AccountController;
 use App\Http\Controllers\Client\CalendarController;
+use App\Http\Controllers\Client\CommitmentController;
 use App\Http\Controllers\Client\EventController;
 use App\Http\Controllers\Client\EventImageController;
 use App\Http\Controllers\Client\ImageController;
+use App\Http\Controllers\Client\MyProposalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\TaskController;
 use App\Http\Controllers\Client\UserController;
@@ -45,6 +47,8 @@ Route::prefix('client')->middleware(['auth:web'])->group(function () {
     Route::resource('events', EventController::class);
     Route::resource('event-image', EventImageController::class);
     Route::resource('events-calendar', CalendarController::class);
+    Route::resource('myproposals', MyProposalController::class);
+    Route::resource('commitment', CommitmentController::class);
 
     Route::prefix('reports')->group(function () {
         Route::resource('proposal', ReportProposalController::class);

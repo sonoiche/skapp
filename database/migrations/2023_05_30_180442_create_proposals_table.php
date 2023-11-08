@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status', ['Pending','Approved','Declined'])->nullable();
             $table->integer('user_action')->nullable();
             $table->decimal('budget', 8, 2)->nullable();
+            $table->text('feedback')->nullable();
             $table->timestamps();
         });
     }

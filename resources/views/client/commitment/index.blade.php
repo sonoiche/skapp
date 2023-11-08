@@ -1,8 +1,5 @@
 @extends('layouts.app', ['page' => ['name' => 'Proposals']])
 @section('content')
-<div class="d-flex justify-content-end my-3">
-    <a href="{{ url('client/proposals/create') }}" class="btn btn-primary">Add New Proposal</a>
-</div>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -18,7 +15,6 @@
                             <th style="width: 10%" class="text-center">Document File</th>
                             <th style="width: 10%">Propose Amount</th>
                             <th style="width: 10%">Created By</th>
-                            <th style="width: 10%">Committee</th>
                             <th style="width: 5%">Status</th>
                             <th style="width: 5%" class="text-center">Action</th>
                         </tr>
@@ -35,7 +31,6 @@
                             </td>
                             <td>{{ $item->budget }}</td>
                             <td>{{ isset($item->user) ? $item->user->fullname : '' }}</td>
-                            <td>{{ isset($item->action) ? $item->action->fullname : '' }}</td>
                             <td>{{ $item->status }}</td>
                             <td class="text-center">
                                 <div class="btn-group">
@@ -43,7 +38,6 @@
                                     <div class="dropdown-menu animated pulse" role="menu">
                                         <a class="dropdown-item" href="{{ url('client/proposals', $item->id) }}/edit">Edit</a>
                                         <a class="dropdown-item" href="{{ url('client/proposals', $item->id) }}">View Proposal</a>
-                                        <a class="dropdown-item" href="javascript:;" onclick="deleteProposal({{ $item->id }})">Delete</a>
                                     </div>
                                 </div>                                
                             </td>
@@ -96,25 +90,5 @@ $(document).ready(function () {
         },
     })
 });
-
-function deleteProposal(id) {
-    swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this proposal!",
-        icon: "warning",
-        buttons: { cancel: !0, confirm: { text: "Yes, delete it!", value: !0, visible: !0, className: "bg-danger", closeModal: !0 } },
-    }).then(function (e) {
-        if(e) {
-            $.ajax({
-                type: "DELETE",
-                url: "{{ url('client/proposals') }}/"+id,
-                dataType: "json",
-                success: function (response) {
-                    location.reload();
-                }
-            });
-        }
-    })
-}
 </script>
 @endsection

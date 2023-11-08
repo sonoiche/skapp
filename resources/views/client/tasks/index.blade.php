@@ -25,7 +25,7 @@
                         <td><strong>Status</strong></td>
                         <td>Task Overdue</td>
                     </tr>
-                    @elseif($item->status != null && $item->due_date < date('Y-m-d'))
+                    @elseif($item->status != null && $item->status != 'Completed' && $item->due_date < date('Y-m-d'))
                     <tr>
                         <td><strong>Status</strong></td>
                         <td>{{ $item->status }} &mdash; Task Overdue</td>

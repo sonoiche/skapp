@@ -38,7 +38,7 @@
                 <!-- START card-->
                 <div class="card card-flat">
                     <div class="card-header text-center bg-dark">
-                        <a href="#"><img class="block-center rounded" src="{{ url('assets/img/logo.png') }}" alt="Image" /></a>
+                        <a href="#"><img class="block-center rounded" src="{{ url('assets/images/logo.png') }}" alt="Image" style="width: 30%" /></a>
                     </div>
                     <div class="card-body">
                         <p class="text-center py-2">SIGN IN TO CONTINUE.</p>

@@ -5,8 +5,8 @@
         <!-- START navbar header-->
         <div class="navbar-header">
             <a class="navbar-brand" href="#/">
-                <div class="brand-logo"><img class="img-fluid" src="{{ url('assets/img/logo.png') }}" alt="App Logo" /></div>
-                <div class="brand-logo-collapsed"><img class="img-fluid" src="{{ url('assets/img/logo-single.png') }}" alt="App Logo" /></div>
+                <div class="brand-logo"><img class="img-fluid" src="{{ url('assets/images/logo.png') }}" alt="App Logo" style="width: 15%;" /></div>
+                <div class="brand-logo-collapsed"><img class="img-fluid" src="{{ url('assets/images/logo.png') }}" alt="App Logo" /></div>
             </a>
         </div>
         <!-- END navbar header-->

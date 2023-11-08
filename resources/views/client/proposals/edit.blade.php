@@ -14,9 +14,11 @@
                     @csrf
                     @method('PUT')
                     @include('client.proposals.form')
+                    @if ($proposal->status != 'Declined')
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Save Changes</button>
                     </div>
+                    @endif
                 </form>
             </div>
         </div>
@@ -27,6 +29,18 @@
 @section('page-js')
 {!! JsValidator::formRequest('App\Http\Requests\ProposalRequest') !!}
 <script>
+$(document).ready(function () {
+    $('#status').change(function (e) { 
+        e.preventDefault();
+        var status = $(this).val();
+        if(status == 'Declined') {
+            $('#div-feedback').show();
+        } else {
+            $('#div-feedback').hide();
+        }
+    });
+});
+
 function removePhoto(id) {
     swal({
         title: "Are you sure?",

@@ -22,7 +22,7 @@ class ProposalController extends Controller
             if($type == 'own-proposal') {
                 $query->where('user_id', $user_id);
             }
-        })->latest()->get();
+        })->where('status', '!=', 'Declined')->latest()->get();
         return view('client.proposals.index', $data);
     }
 
@@ -93,6 +93,7 @@ class ProposalController extends Controller
             $proposal->status   = $request['status'];
             if(in_array($request['status'], ['Approved','Declined'])) {
                 $proposal->user_action = auth()->user()->id;
+                $proposal->feedback = $request['feedback'];
             }
         }
 

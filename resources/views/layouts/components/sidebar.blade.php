@@ -37,6 +37,12 @@
                             <a href="{{ url('client/proposals') }}" title="Proposals"><span>List of Proposals</span></a>
                         </li>
                         <li class=" ">
+                            <a href="{{ url('client/myproposals') }}" title="My Proposals"><span>My Proposals</span></a>
+                        </li>
+                        <li class=" ">
+                            <a href="{{ url('client/commitment') }}" title="My Proposals"><span>Proposals as Committee</span></a>
+                        </li>
+                        <li class=" ">
                             <a href="{{ url('client/proposals/create') }}" title="Proposals"><span>Submit a Proposal</span></a>
                         </li>
                         <li class=" ">
