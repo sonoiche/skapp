@@ -56,7 +56,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
+                @if (auth()->user()->role == 'Admin')
+                <h3 class="card-title">Tasks Due Soon</h3>
+                @else
                 <h3 class="card-title">Assigned Task Due Soon</h3>
+                @endif
             </div>
             <div class="card-body">
                 <table class="table table-hover table-striped">

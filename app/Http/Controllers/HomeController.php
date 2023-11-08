@@ -31,7 +31,11 @@ class HomeController extends Controller
         $data['activeProposalCount'] = Proposal::where('status', 'Approved')->count();
         $data['myProposalCount']     = Proposal::where('user_id', $user_id)->where('status', '!=', 'Declined')->count();
         $data['assignedTaskCount']   = ProposalTask::where('assigned_user', $user_id)->where('status', '!=', 'Completed')->count();
-        $data['tasks']               = ProposalTask::where('assigned_user', $user_id)->where('status', '!=', 'Completed')->where('due_date', '<', $today)->get();
+        if (auth()->user()->role == 'Admin') {
+            $data['tasks']           = ProposalTask::where('status', '!=', 'Completed')->where('due_date', '<', $today)->get();
+        } else {
+            $data['tasks']           = ProposalTask::where('assigned_user', $user_id)->where('status', '!=', 'Completed')->where('due_date', '<', $today)->get();
+        }
         
         return view('home', $data);
     }
