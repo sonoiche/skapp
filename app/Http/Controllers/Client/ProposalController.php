@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Proposal;
 use App\Models\ProposalTask;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\ProposalExpense;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProposalRequest;
+use App\Jobs\SendNotificationEmailJob;
 use Illuminate\Support\Facades\Storage;
 
 class ProposalController extends Controller
@@ -98,6 +100,10 @@ class ProposalController extends Controller
         }
 
         $proposal->save();
+
+        if($request['status'] == 'Declined') {
+            SendNotificationEmailJob::dispatch($proposal)->delay(Carbon::now()->addSeconds(5));
+        }
 
         return redirect()->back()->with('success', 'The proposal has been updated.');
     }

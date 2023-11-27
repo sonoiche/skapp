@@ -1,7 +1,9 @@
 @extends('layouts.app', ['page' => ['name' => 'Events Calendar']])
 @section('content')
 <div class="d-flex justify-content-end my-3">
+    @if (auth()->user()->role == 'Admin')
     <a href="{{ url('client/events/create') }}" class="btn btn-primary">Add New Event</a>
+    @endif
 </div>
 <div class="row">
     <div class="col-md-12">

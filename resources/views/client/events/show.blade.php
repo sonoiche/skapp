@@ -7,7 +7,11 @@
                 <div class="col-5 d-flex align-items-center justify-content-center" style="background: url({{ $event->photo }}); background-size: cover;"></div>
                 <div class="col-7">
                     <div class="p-3">
-                        <div class="float-right"><a class="btn btn-outline-primary btn-sm" href="{{ url('client/events', $event->id) }}/edit"><i class="fa fa-pencil-alt fa-fw"></i> &nbsp; Edit</a></div>
+                        @if (auth()->user()->role == 'Admin')
+                        <div class="float-right">
+                            <a class="btn btn-outline-primary btn-sm" href="{{ url('client/events', $event->id) }}/edit"><i class="fa fa-pencil-alt fa-fw"></i> &nbsp; Edit</a>
+                        </div>
+                        @endif
                         <div class="d-flex">
                             @if($event->date_from != $event->date_to)
                             <p><span class="text-lg">{{ $event->schedule_from[1] }}</span>{{ $event->schedule_from[0] }}</p>

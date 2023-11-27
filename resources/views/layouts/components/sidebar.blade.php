@@ -87,6 +87,13 @@
                     </a>
                 </li>
                 @endif
+                @if (auth()->user()->role == 'User')
+                <li class=" ">
+                    <a href="{{ url('client/events-calendar') }}" title="Events Calendar">
+                        <em class="icon-calendar"></em><span data-localize="sidebar.nav.EVENTS">Events Calendar</span>
+                    </a>
+                </li>
+                @endif
                 <li class=" ">
                     <a href="{{ url('client/account') }}" title="Account Settings">
                         <em class="icon-settings"></em><span data-localize="sidebar.nav.ACCOUNT">Account Settings</span>

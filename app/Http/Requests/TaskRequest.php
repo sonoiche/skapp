@@ -24,7 +24,6 @@ class TaskRequest extends FormRequest
         return [
             'title'         => 'required',
             'description'   => 'required',
-            'document_file' => 'required',
             'assigned_user' => 'required',
             'due_date'      => 'required'
         ];

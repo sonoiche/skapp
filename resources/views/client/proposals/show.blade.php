@@ -31,6 +31,14 @@
                         {{ $proposal->status }}
                     </div>
                 </div>
+                @if($proposal->status == 'Declined')
+                <div class="form-group row">
+                    <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">Feedback</label>
+                    <div class="col-xl-10 col-md-9 col-8 mt-2">
+                        {{ $proposal->feedback ?? 'Unknown' }}
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
